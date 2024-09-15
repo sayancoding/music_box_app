@@ -18,7 +18,7 @@ class SongListView extends StatelessWidget {
             ignoreCase: true,
             orderType: OrderType.ASC_OR_SMALLER,
             uriType: UriType.EXTERNAL,
-            sortType: SongSortType.TITLE),
+            sortType: null),
         builder: (BuildContext context, snapshot) {
           if (snapshot.data == null) {
             return const Center(
@@ -33,7 +33,7 @@ class SongListView extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
                 itemCount: snapshot.data?.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return SongCard(songModel: snapshot.data![index],);
+                  return SongCard(songModel: snapshot.data![index],index: index,);
                 });
           }
         });

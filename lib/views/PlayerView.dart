@@ -37,37 +37,41 @@ class PlayerView extends StatelessWidget {
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       decoration: const BoxDecoration(
                           shape: BoxShape.circle, color: Colors.white60),
-                      child: QueryArtworkWidget(
-                        id: controller.currentSongModel.id,
-                        type: ArtworkType.AUDIO,
-                        nullArtworkWidget: const Icon(
-                          Icons.music_note_rounded,
-                          size: 120,
+                      child: Obx(
+                        () => QueryArtworkWidget(
+                          id: controller.currentSongModel.value.id,
+                          type: ArtworkType.AUDIO,
+                          nullArtworkWidget: const Icon(
+                            Icons.music_note_rounded,
+                            size: 120,
+                          ),
                         ),
                       )),
                 ),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    controller.currentSongModel.title,
-                    textAlign: TextAlign.center,
-                    style: ourTextStyle(
-                        fontSize: 20, fontFamily: semiBold, letterSpacing: 1),
-                    softWrap: true,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Text(
-                    controller.currentSongModel.artist!,
-                    style: ourTextStyle(
-                        fontSize: 14, fontFamily: regular, letterSpacing: 1),
-                    softWrap: true,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  )
-                ],
+              Obx(
+                () => Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      controller.currentSongModel.value.title,
+                      textAlign: TextAlign.center,
+                      style: ourTextStyle(
+                          fontSize: 20, fontFamily: semiBold, letterSpacing: 1),
+                      softWrap: true,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      controller.currentSongModel.value.artist!,
+                      style: ourTextStyle(
+                          fontSize: 14, fontFamily: regular, letterSpacing: 1),
+                      softWrap: true,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    )
+                  ],
+                ),
               ),
               SizedBox(
                 height: 28,
@@ -115,7 +119,7 @@ class PlayerView extends StatelessWidget {
                         Row(
                           children: [
                             IconButton(
-                                onPressed: () {},
+                                onPressed: () {controller.playPrevSong();},
                                 color: darkColor,
                                 icon: const Icon(
                                   Icons.skip_previous_rounded,

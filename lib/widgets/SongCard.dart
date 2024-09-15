@@ -8,10 +8,12 @@ import 'package:on_audio_query/on_audio_query.dart';
 
 class SongCard extends StatelessWidget {
   final SongModel songModel;
+  final int index;
 
   const SongCard({
     super.key,
     required this.songModel,
+    required this.index
   });
 
   @override
@@ -49,7 +51,7 @@ class SongCard extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     print("Playing song..");
-                    controller.playAudio(songModel);
+                    controller.playAudio(songModel,index);
                     Get.to(()=> PlayerView());
                   },
                   child: SizedBox(
@@ -67,12 +69,12 @@ class SongCard extends StatelessWidget {
                               fontSize: 14,
                               color: (controller.isPlaying.value &&
                                       controller.playIndex.value ==
-                                          songModel.id)
+                                          index)
                                   ? primaryColor
                                   : darkColor,
                               fontFamily: (controller.isPlaying.value &&
                                       controller.playIndex.value ==
-                                          songModel.id)
+                                          index)
                                   ? bold
                                   : semiBold,
                               letterSpacing: 0.9),

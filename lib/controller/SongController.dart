@@ -10,7 +10,7 @@ class SongController extends GetxController {
         ignoreCase: true,
         orderType: OrderType.ASC_OR_SMALLER,
         uriType: UriType.EXTERNAL,
-        sortType: SongSortType.TITLE);
+        sortType: null);
     _songs = songs;
     update();
   }
