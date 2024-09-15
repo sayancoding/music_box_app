@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:music_box/const/Color.dart';
 import 'package:music_box/const/TextStyle.dart';
 import 'package:music_box/controller/PlayerController.dart';
+import 'package:music_box/views/PlayerView.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class SongCard extends StatelessWidget {
@@ -48,7 +49,8 @@ class SongCard extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     print("Playing song..");
-                    controller.playAudio(songModel.uri, songModel.id);
+                    controller.playAudio(songModel);
+                    Get.to(()=> PlayerView());
                   },
                   child: SizedBox(
                     width: 200,
