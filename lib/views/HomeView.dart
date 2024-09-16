@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:music_box/const/TextStyle.dart';
 import 'package:music_box/const/color.dart';
 import 'package:music_box/controller/PlayerController.dart';
+import 'package:music_box/views/AlbumListView.dart';
 import 'package:music_box/views/PlayerView.dart';
 import 'package:music_box/views/SongListView.dart';
 
@@ -128,10 +129,7 @@ class Homeview extends StatelessWidget {
                             "Playlist",
                             style: ourTextStyle(),
                           ),
-                          Text(
-                            "Album",
-                            style: ourTextStyle(),
-                          ),
+                        const AlbumsListView(),
                           Text(
                             "Artiest",
                             style: ourTextStyle(),

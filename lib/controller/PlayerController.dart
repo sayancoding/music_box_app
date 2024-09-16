@@ -10,6 +10,7 @@ class PlayerController extends GetxController {
   final audioPlayer = AudioPlayer();
 
   var playIndex = 0.obs;
+  var playSongId = 0.obs;
   var isPlaying = false.obs;
   var currentSongModel = SongModel({}).obs;
 
@@ -51,6 +52,7 @@ class PlayerController extends GetxController {
   playAudio(SongModel? songModel, int index) {
     currentSongModel.value = songModel!;
     playIndex.value = index;
+    playSongId.value = songModel.id;
     isPlaying.value = true;
     audioPlayer.setAudioSource(AudioSource.uri(Uri.parse(songModel.uri!)));
     audioPlayer.play();
