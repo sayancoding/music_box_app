@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
@@ -20,7 +19,6 @@ class PlayerController extends GetxController {
   var maxVal = 0.0.obs;
   var currentVal = 0.0.obs;
 
-  List<SongModel> _songs = [];
 
   @override
   void onInit() {
@@ -46,6 +44,10 @@ class PlayerController extends GetxController {
     audioPlayer.positionStream.listen((p) {
       position.value = p.toString().split(".")[0];
       currentVal.value = p.inSeconds.toDouble();
+      if(currentVal.value >= maxVal.value - 1.0){
+        isPlaying.value = false;
+        audioPlayer.pause();
+      }
     });
   }
 
@@ -55,8 +57,8 @@ class PlayerController extends GetxController {
     playSongId.value = songModel.id;
     isPlaying.value = true;
     audioPlayer.setAudioSource(AudioSource.uri(Uri.parse(songModel.uri!)));
-    audioPlayer.play();
     updatePosition();
+    audioPlayer.play();
   }
 
   pauseAudio() {

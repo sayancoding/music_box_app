@@ -19,11 +19,17 @@ class AlbumsListView extends StatelessWidget {
               return ListTile(
                 title: Text(songController.albums[index].album),
                 subtitle: Text(songController.albums[index].artist!),
-                leading: const CircleAvatar(child: Icon(Icons.album_rounded),),
+                leading: const CircleAvatar(
+                  child: Icon(Icons.album_rounded),
+                ),
                 onTap: () {
                   // Navigate to album details screen
                   print('Tapped on alum index ${songController.albums[index]}');
-                  Get.to(() =>AlbumDetailsView(albumId: songController.albums[index].id, albumIdex: index,));
+                  Get.to(() => AlbumDetailsView(
+                        albumId: songController.albums[index].id,
+                        albumIdex: index,
+                        albumName: songController.albums[index].album,
+                      ));
                 },
               );
             },

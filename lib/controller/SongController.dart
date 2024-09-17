@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class SongController extends GetxController {

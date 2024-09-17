@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:music_box/controller/PlayerController.dart';
+import 'package:music_box/controller/SongController.dart';
 import 'package:music_box/widgets/SongCard.dart';
-import 'package:on_audio_query/on_audio_query.dart';
 
 class SongListView extends StatelessWidget {
   const SongListView({
@@ -11,32 +10,22 @@ class SongListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var controller = Get.put(PlayerController());
+    var songController = Get.put(SongController());
 
-    return FutureBuilder<List<SongModel>>(
-        future: controller.audioQuery.querySongs(
-            ignoreCase: true,
-            orderType: OrderType.ASC_OR_SMALLER,
-            uriType: UriType.EXTERNAL,
-            sortType: null),
-        builder: (BuildContext context, snapshot) {
-          if (snapshot.data == null) {
-            return const Center(
-              child: CircularProgressIndicator(),
+    return FutureBuilder<void>(
+          future: songController.fetchSongs(),
+          builder: (BuildContext context, snapshot) {
+            return Container(
+              decoration: const BoxDecoration(color: Colors.transparent),
+              child: ListView.builder(
+                itemCount: songController.songs.length,
+                itemBuilder: (context, index) {
+                  return SongCard(
+                      index: index,
+                      songModel: songController.songs[index]);
+                },
+              ),
             );
-          } else if (snapshot.data?.isEmpty == true) {
-            return const Center(
-              child: Text("No Songs found"),
-            );
-          } else {
-            return ListView.builder(
-              physics: const BouncingScrollPhysics(),
-                itemCount: snapshot.data?.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return SongCard(songModel: snapshot.data![index],index: index,);
-                });
-          }
-        });
-    // return const Text("Songs");
+          });
   }
 }
